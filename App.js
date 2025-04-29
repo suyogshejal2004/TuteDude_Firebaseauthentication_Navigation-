@@ -1,12 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
+
+import { StyleSheet, } from 'react-native';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+import { ThemeProvider } from 'react-native-rapi-ui';
+import AppNAvigator from './src/Navigator/AppNavigator';
+import { AuthProvider } from './src/AuthoContext/AuthProvider';
+
+const stack =createNativeStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <AuthProvider>
+        
+        <AppNAvigator />
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
@@ -18,3 +29,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+//1
