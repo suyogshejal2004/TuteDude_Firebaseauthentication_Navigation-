@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   ScrollView,
@@ -13,9 +13,31 @@ import {
   useTheme,
   themeColor,
 } from "react-native-rapi-ui";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation }) => {
   const { isDarkmode, setTheme } = useTheme();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      alert("Please enter both email and password.");
+      return;
+    }
+
+    setLoading(true);
+    const auth = getAuth();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // Navigation to AppStack is handled by MainNavigator via AuthContext
+    } catch (error) {
+      alert("Login failed: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
@@ -24,7 +46,6 @@ const Login = ({ navigation }) => {
           contentContainerStyle={{
             flexGrow: 1,
             justifyContent: "center",
-            alignItems: "center",
           }}
         >
           <View
@@ -33,17 +54,33 @@ const Login = ({ navigation }) => {
               backgroundColor: isDarkmode ? themeColor.dark : themeColor.white,
             }}
           >
-            <Text size="h3" style={{ alignSelf: "center", marginBottom: 20 }}>
+            <Text
+              size="h3"
+              style={{ alignSelf: "center", marginBottom: 20, padding: 20 }}
+            >
               Login
             </Text>
-            <Text>Email</Text>
-            <TextInput placeholder="Enter your email" />
-            <Text style={{ marginTop: 15 }}>Password</Text>
+            <Text style={{ padding: 10 }}>Email</Text>
+            <TextInput
+              placeholder="Enter your email"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            <Text style={{ marginTop: 15, padding: 10 }}>Password</Text>
             <TextInput
               placeholder="Enter your password"
+              value={password}
+              onChangeText={setPassword}
               secureTextEntry={true}
             />
-            <Button text="Continue" />
+            <Button
+              text={loading ? "Logging in..." : "Continue"}
+              onPress={handleLogin}
+              style={{ padding: 20 }}
+              disabled={loading}
+            />
 
             <View
               style={{
@@ -58,7 +95,7 @@ const Login = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop: 10, alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => navigation.navigate("ForgotPassword")}
               >
@@ -66,7 +103,7 @@ const Login = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <View style={{ marginTop: 30 }}>
+            <View style={{ alignItems: "center", marginTop: 30 }}>
               <TouchableOpacity
                 onPress={() => setTheme(isDarkmode ? "light" : "dark")}
               >
