@@ -14,6 +14,8 @@ import {
   themeColor,
 } from "react-native-rapi-ui";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import LottieView from "lottie-react-native";
+
 
 const Login = ({ navigation }) => {
   const { isDarkmode, setTheme } = useTheme();
@@ -42,6 +44,17 @@ const Login = ({ navigation }) => {
   return (
     <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
       <Layout>
+        <LottieView
+    source={require("/Users/suyogshejal/React_Native_Navigation/src/login - 1746012031620.json")}
+    autoPlay
+    loop
+    style={{
+      width: 250,
+      height: 240,
+      alignSelf: "center",
+     
+    }}
+  />
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
@@ -75,12 +88,14 @@ const Login = ({ navigation }) => {
               onChangeText={setPassword}
               secureTextEntry={true}
             />
-            <Button
-              text={loading ? "Logging in..." : "Continue"}
-              onPress={handleLogin}
-              style={{ padding: 20 }}
-              disabled={loading}
-            />
+            <View style={{ marginTop: 20 }}>
+              <Button
+                text={loading ? "Logging in..." : "Continue"}
+                onPress={handleLogin}
+                style={{ padding: 20 }}
+                disabled={loading}
+              />
+            </View>
 
             <View
               style={{
