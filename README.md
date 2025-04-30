@@ -43,7 +43,7 @@ This is a React Native mobile application built using Expo that implements Fireb
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/suyogshejal2004/react-native-firebase-auth-app.git
+git clone https://github.com/suyogshejal2004/TuteDude_Firebaseauthentication_Navigation-.git
 cd react-native-firebase-auth-app
 ```
 
