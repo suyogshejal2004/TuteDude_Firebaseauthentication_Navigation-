@@ -45,16 +45,15 @@ const Login = ({ navigation }) => {
     <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
       <Layout>
         <LottieView
-    source={require("/Users/suyogshejal/React_Native_Navigation/src/login - 1746012031620.json")}
-    autoPlay
-    loop
-    style={{
-      width: 250,
-      height: 240,
-      alignSelf: "center",
-     
-    }}
-  />
+          source={require("/Users/suyogshejal/React_Native_Navigation/src/Animations/login - 1746012031620.json")}
+          autoPlay
+          loop
+          style={{
+            width: 250,
+            height: 240,
+            alignSelf: "center",
+          }}
+        />
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,

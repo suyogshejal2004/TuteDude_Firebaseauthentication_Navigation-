@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "react-native-rapi-ui";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import LottieView from "lottie-react-native";
 
 export default function Register({ navigation }) {
   const { isDarkmode } = useTheme();
@@ -35,6 +36,12 @@ export default function Register({ navigation }) {
 
   return (
     <Layout>
+      <LottieView
+        source={require("/Users/suyogshejal/React_Native_Navigation/src/Animations/register.json")}
+        autoPlay
+        loop
+        style={{ width: 200, height: 200, alignSelf: "center" }} // optional
+      />
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,

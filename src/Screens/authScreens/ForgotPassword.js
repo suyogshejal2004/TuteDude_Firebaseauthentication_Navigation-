@@ -9,7 +9,7 @@ import {
   themeColor,
 } from "react-native-rapi-ui";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-
+import LottieView from "lottie-react-native";
 const ForgotPassword = ({ navigation }) => {
   const { isDarkmode } = useTheme();
   const [email, setEmail] = useState("");
@@ -41,11 +41,19 @@ const ForgotPassword = ({ navigation }) => {
   return (
     <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
       <Layout>
+        <LottieView
+          source={require("/Users/suyogshejal/React_Native_Navigation/src/Animations/forgotPassword.json")}
+          autoPlay
+          loop
+          style={{ width: 200, height: 200, alignSelf: "center" }} // optional
+        />
+
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
             justifyContent: "center",
             paddingHorizontal: 20,
+            marginBottom: 90,
           }}
         >
           <View
@@ -55,11 +63,11 @@ const ForgotPassword = ({ navigation }) => {
               borderRadius: 10,
             }}
           >
-            <Text size="h3" style={{ alignSelf: "center", marginBottom: 20 }}>
+            <Text size="h3" style={{ alignSelf: "center", marginBottom: 0,  }}>
               Forgot Password
             </Text>
 
-            <Text>Email</Text>
+            <Text style={{padding:10}}>Email</Text>
             <TextInput
               placeholder="Enter your email"
               value={email}
